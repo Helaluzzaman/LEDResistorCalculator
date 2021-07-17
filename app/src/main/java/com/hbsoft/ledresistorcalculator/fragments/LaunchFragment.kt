@@ -45,15 +45,17 @@ class LaunchFragment : Fragment() {
             val inputVoltageText = etInputVoltage.text.toString()
             try {
                 inputVoltage = inputVoltageText.toDouble()
+                val validateInputVoltage = mLaunchViewModel.validator(inputVoltage, currentLed.forwardVoltage_V)
+                if(validateInputVoltage ){
+                    mLaunchViewModel.calculateResult(inputVoltage)
+                }else{
+                    Toast.makeText(requireContext(), "Input voltage should be greater than Forward Voltage.", Toast.LENGTH_SHORT).show()
+                }
             }catch (exception: Exception){
                 Log.i("input", exception.toString())
+                Toast.makeText(requireContext(), "Input voltage can not be empty", Toast.LENGTH_SHORT).show()
             }
-            val validateInputVoltage = mLaunchViewModel.validator(inputVoltage)
-            if(validateInputVoltage ){
-                mLaunchViewModel.calculateResult(inputVoltage)
-            }else{
-                Toast.makeText(requireContext(), "Input voltage is empty", Toast.LENGTH_SHORT).show()
-            }
+            
 
         }
         setUiData()

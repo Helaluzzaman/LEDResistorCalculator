@@ -56,14 +56,15 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             >
+
             <EditText
                 android:id="@+id/et_input_voltage"
                 android:layout_width="match_parent"
-                android:gravity="center"
                 android:layout_height="wrap_content"
-                />
+                android:inputType="numberDecimal"
+                android:gravity="center" />
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 

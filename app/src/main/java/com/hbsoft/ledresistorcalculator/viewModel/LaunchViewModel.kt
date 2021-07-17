@@ -15,8 +15,9 @@ class LaunchViewModel(application: Application): AndroidViewModel(application) {
     val repository: Repository = Repository()
     val LedDataList =repository.getAllLedData()
     val LedNameList = repository.getAllLedNames()
+    // working variables
     var currentLed= MutableLiveData<Led>()
-    var currentMode =  MutableLiveData<String>()
+    var currentConnection =  MutableLiveData<String>()
     var rawResultOhm = MutableLiveData<Double>()
 
     val listener = object : AdapterView.OnItemSelectedListener{
@@ -42,8 +43,8 @@ class LaunchViewModel(application: Application): AndroidViewModel(application) {
         rawResultOhm.value = resultInOhm
     }
 
-    fun validator(input: Double): Boolean{
-        return input > 0
+    fun validator(inputVoltage: Double, ForwardVoltage: Double): Boolean{
+        return inputVoltage > ForwardVoltage
     }
 
 }

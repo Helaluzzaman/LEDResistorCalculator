@@ -13,6 +13,9 @@ data class Led(
 
 class LedData{
     companion object{
+        const val SINGLE = "single"
+        const val SERIES = "series"
+        const val PARALLEL = "parallel"
         fun getLedList(): List<Led>{
             val lst = ArrayList<Led>()
             val redLed = Led(1,
