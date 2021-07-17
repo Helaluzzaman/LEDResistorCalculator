@@ -10,5 +10,8 @@
     <string name="led_number">Led Number</string>
     <string name="led_voltage_v">LED Voltage(V)</string>
     <string name="calculate">Calculate</string>
+    <string name="about">About</string>
+    <string name="history">History</string>
+    <string name="help">Help</string>
 
 </resources>
