@@ -6,9 +6,12 @@ import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.*
+import androidx.core.view.get
 import androidx.fragment.app.viewModels
 import com.hbsoft.ledresistorcalculator.R
+import com.hbsoft.ledresistorcalculator.data.CalculationData
 import com.hbsoft.ledresistorcalculator.data.Led
+import com.hbsoft.ledresistorcalculator.data.LedData
 import com.hbsoft.ledresistorcalculator.viewModel.LaunchViewModel
 import org.w3c.dom.Text
 import java.lang.Exception
@@ -17,13 +20,15 @@ class LaunchFragment : Fragment() {
 
     val mLaunchViewModel: LaunchViewModel by viewModels()
     lateinit var sLedColor: Spinner
-    lateinit var etInputVoltage: EditText
+    lateinit var etInputVoltage: EditText   // input
     lateinit var bCalculate: Button
     lateinit var tvResult: TextView
-    lateinit var etForwardVoltage: EditText
-    lateinit var etCurrentMax : EditText
+    lateinit var etForwardVoltage: EditText  // input
+    lateinit var etCurrentMax : EditText    // input
+    lateinit var rgConnection: RadioGroup
+    lateinit var llExtraData: LinearLayout    // input [1]
 
-
+    // variables
     lateinit var  currentLed: Led
 
     override fun onCreateView(
@@ -39,24 +44,36 @@ class LaunchFragment : Fragment() {
         etForwardVoltage = view.findViewById(R.id.et_forward_voltage)
         etCurrentMax = view.findViewById(R.id.et_current_max)
         tvResult = view.findViewById(R.id.tv_result)
+        rgConnection = view.findViewById(R.id.radioGroup)
+        llExtraData = view.findViewById(R.id.ll_led_number)
         setSpinner()
+        rgConnection.setOnCheckedChangeListener(mLaunchViewModel.radioGroupListener)
         bCalculate.setOnClickListener{
-            var inputVoltage: Double = 0.0
+
             val inputVoltageText = etInputVoltage.text.toString()
+            val ledNumberText = (llExtraData[1] as EditText).text.toString()
+            val forwardVoltageText = etForwardVoltage.text.toString()
+            val currentMaxText = etCurrentMax.text.toString()
             try {
-                inputVoltage = inputVoltageText.toDouble()
-                val validateInputVoltage = mLaunchViewModel.validator(inputVoltage, currentLed.forwardVoltage_V)
-                if(validateInputVoltage ){
-                    mLaunchViewModel.calculateResult(inputVoltage)
-                }else{
-                    Toast.makeText(requireContext(), "Input voltage should be greater than Forward Voltage.", Toast.LENGTH_SHORT).show()
-                }
+                val inputVoltage = inputVoltageText.toDouble()
+                val ledNumber = ledNumberText.toInt()
+                val forwardVoltage = forwardVoltageText.toDouble()
+                val currentMax = currentMaxText.toDouble()
+                val calculationData = CalculationData(inputVoltage,
+                    ledNumber,
+                    mLaunchViewModel.currentConnection.value!!,
+                    currentLed.apply {
+                        this.currentMax_mA = currentMax
+                        this.forwardVoltage_V = forwardVoltage
+                    }
+                )
+                val result = mLaunchViewModel.calculateResult(calculationData)
+                Toast.makeText(requireContext(), "$result", Toast.LENGTH_SHORT).show()
+                Log.i("result code",result.toString() )
             }catch (exception: Exception){
                 Log.i("input", exception.toString())
                 Toast.makeText(requireContext(), "Input voltage can not be empty", Toast.LENGTH_SHORT).show()
             }
-            
-
         }
         setUiData()
         return view
@@ -68,9 +85,17 @@ class LaunchFragment : Fragment() {
             etForwardVoltage.setText(it.forwardVoltage_V.toString())
             etCurrentMax.setText(it.currentMax_mA.toString())
         })
+        mLaunchViewModel.currentConnection.observe(viewLifecycleOwner,{
+            when(it){
+                LedData.SINGLE -> llExtraData.visibility = View.GONE
+                LedData.SERIES -> llExtraData.visibility = View.VISIBLE
+                LedData.PARALLEL -> llExtraData.visibility = View.VISIBLE
+            }
+        })
         mLaunchViewModel.rawResultOhm.observe(viewLifecycleOwner, {
             tvResult.setText("Result: " + it.toString() + " ohm (raw result.)")
         })
+
     }
 
     fun setSpinner(){

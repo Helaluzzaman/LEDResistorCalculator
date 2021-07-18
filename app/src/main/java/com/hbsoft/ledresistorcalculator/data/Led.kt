@@ -7,8 +7,8 @@ data class Led(
     val id:Int,
     val name: String,
     val color: Int,
-    val forwardVoltage_V: Double,
-    val currentMax_mA:Double
+    var forwardVoltage_V: Double,
+    var currentMax_mA:Double
 )
 
 class LedData{
