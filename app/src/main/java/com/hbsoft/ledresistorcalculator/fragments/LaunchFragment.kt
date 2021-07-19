@@ -22,7 +22,7 @@ class LaunchFragment : Fragment() {
     lateinit var sLedColor: Spinner
     lateinit var etInputVoltage: EditText   // input
     lateinit var bCalculate: Button
-    lateinit var tvResult: TextView
+    lateinit var tvResult: TextView        // result
     lateinit var etForwardVoltage: EditText  // input
     lateinit var etCurrentMax : EditText    // input
     lateinit var rgConnection: RadioGroup
@@ -68,7 +68,7 @@ class LaunchFragment : Fragment() {
                     }
                 )
                 val result = mLaunchViewModel.calculateResult(calculationData)
-                Toast.makeText(requireContext(), "$result", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Code: $result", Toast.LENGTH_SHORT).show()
                 Log.i("result code",result.toString() )
             }catch (exception: Exception){
                 Log.i("input", exception.toString())
@@ -93,7 +93,7 @@ class LaunchFragment : Fragment() {
             }
         })
         mLaunchViewModel.rawResultOhm.observe(viewLifecycleOwner, {
-            tvResult.setText("Result: " + it.toString() + " ohm (raw result.)")
+            tvResult.text = it
         })
 
     }

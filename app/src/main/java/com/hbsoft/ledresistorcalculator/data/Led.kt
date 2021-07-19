@@ -16,6 +16,13 @@ class LedData{
         const val SINGLE = "single"
         const val SERIES = "series"
         const val PARALLEL = "parallel"
+
+        const val SUCCESS = 1
+        const val ZERO_PROBLEM = 0
+        const val VOLTAGE_PROBLEM = 2
+        const val LED_NUMBER_PROBLEM = 3
+
+
         fun getLedList(): List<Led>{
             val lst = ArrayList<Led>()
             val redLed = Led(1,

@@ -11,4 +11,9 @@
 
 
     <color name="ORANGE">#FF9800</color>
+
+
+    <color name="Brand_Pink">#E56BCD</color>
+    <color name="BrandPrimary">#53CCF8</color>
+    <color name="BrandDark">#707071</color>
 </resources>
