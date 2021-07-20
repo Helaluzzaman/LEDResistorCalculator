@@ -1,11 +1,12 @@
 package com.hbsoft.ledresistorcalculator.fragments
 
 import android.os.Bundle
-import android.os.Trace
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.*
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
 import androidx.core.view.get
 import androidx.fragment.app.viewModels
 import com.hbsoft.ledresistorcalculator.R
@@ -13,7 +14,6 @@ import com.hbsoft.ledresistorcalculator.data.CalculationData
 import com.hbsoft.ledresistorcalculator.data.Led
 import com.hbsoft.ledresistorcalculator.data.LedData
 import com.hbsoft.ledresistorcalculator.viewModel.LaunchViewModel
-import org.w3c.dom.Text
 import java.lang.Exception
 
 class LaunchFragment : Fragment() {
@@ -75,6 +75,7 @@ class LaunchFragment : Fragment() {
                 Toast.makeText(requireContext(), "Input voltage can not be empty", Toast.LENGTH_SHORT).show()
             }
         }
+//        AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_FOLLOW_SYSTEM)
         setUiData()
         return view
     }

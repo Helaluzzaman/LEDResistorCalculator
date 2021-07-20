@@ -8,6 +8,7 @@ import android.widget.RadioGroup
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.hbsoft.ledresistorcalculator.R
+import com.hbsoft.ledresistorcalculator.data.Calculation.Calculate
 import com.hbsoft.ledresistorcalculator.data.CalculationData
 import com.hbsoft.ledresistorcalculator.data.Led
 import com.hbsoft.ledresistorcalculator.data.LedData
@@ -118,7 +119,7 @@ class LaunchViewModel(application: Application): AndroidViewModel(application) {
             val resistorOhm = (voltage/current)*1000
             val powerWatt = voltage* current/1000
             val finalResistorValue = addKiloMegaGigaSuffix(resistorOhm) + "Ω"
-            val suggestion = "resistor's power rating: $powerWatt"
+            val suggestion = "resistor's power rating: ${Calculate.convertToStandardPower(powerWatt)}"
             setFinalResult(finalResistorValue, suggestion)
             rawResultOhm.value = finalResistorValue    // fow testing
             Log.i("result", finalResistorValue + "ohm, Rating:" + powerWatt.toString())

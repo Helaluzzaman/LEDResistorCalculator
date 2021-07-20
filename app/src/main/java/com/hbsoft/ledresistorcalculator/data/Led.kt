@@ -32,13 +32,20 @@ class LedData{
                 20.0
                 )
             lst.add(redLed)
-            val redOrange = Led(2,
+            val orangeLed = Led(2,
                 "Orange",
                 R.color.ORANGE,
                 2.1,
                 20.0
             )
-            lst.add(redOrange)
+            lst.add(orangeLed)
+            val yellow = Led(1,
+                "Red",
+                Color.YELLOW,
+                2.1,
+                20.0
+            )
+            lst.add(redLed)
 
             return lst
         }
