@@ -119,10 +119,10 @@ class LaunchViewModel(application: Application): AndroidViewModel(application) {
             val resistorOhm = (voltage/current)*1000
             val powerWatt = voltage* current/1000
             val finalResistorValue = addKiloMegaGigaSuffix(resistorOhm) + "Ω"
-            val suggestion = "resistor's power rating: ${Calculate.convertToStandardPower(powerWatt)}"
+            val suggestion = "resistor's power rating: ${Calculate.convertToStandardPower(powerWatt)}W"
             setFinalResult(finalResistorValue, suggestion)
             rawResultOhm.value = finalResistorValue    // fow testing
-            Log.i("result", finalResistorValue + "ohm, Rating:" + powerWatt.toString())
+            Log.i("result", finalResistorValue + "ohm, Rating:" + suggestion)
 
             return LedData.SUCCESS   // successful result
         }else{
