@@ -8,6 +8,7 @@ object Calculate {
             if(input < .25) return "1/4"
             if(input < .5) return "1/2"
             if(input < .75) return "3/4"
+            else return "1"
         }else{
             val fraction = input - input.toInt()
             if(fraction < .5){
@@ -17,6 +18,5 @@ object Calculate {
                 return input.roundToInt().toString()
             }
         }
-        return "0"
     }
 }

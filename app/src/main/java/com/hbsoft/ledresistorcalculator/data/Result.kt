@@ -1,6 +1,6 @@
 package com.hbsoft.ledresistorcalculator.data
 
 data class Result(
-    var result: String,
-    var suggestion: String
+    var result: String = "no",
+    var suggestion: String = "no"
 )

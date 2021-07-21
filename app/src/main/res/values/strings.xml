@@ -5,7 +5,7 @@
     <string name="single">Single</string>
     <string name="series">Series</string>
     <string name="parallel">Parallel</string>
-    <string name="led_color">LED Color</string>
+    <string name="led_color">LED Type</string>
     <string name="voltage_input">Voltage Input</string>
     <string name="led_number">Led Number</string>
     <string name="led_voltage_v">LED Voltage(V)</string>
@@ -13,5 +13,6 @@
     <string name="about">About</string>
     <string name="history">History</string>
     <string name="help">Help</string>
+    <string name="result">result</string>
 
 </resources>

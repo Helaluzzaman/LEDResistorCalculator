@@ -16,4 +16,7 @@
     <color name="Brand_Pink">#E56BCD</color>
     <color name="BrandPrimary">#53CCF8</color>
     <color name="BrandDark">#707071</color>
+
+    <color name="BrandResultText">#90f24a</color>
+    <color name="BrandResultBackground">#515a73</color>
 </resources>

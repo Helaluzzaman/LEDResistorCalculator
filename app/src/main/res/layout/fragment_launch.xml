@@ -24,11 +24,20 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/Brand_Pink"
+        android:backgroundTint="@color/BrandResultBackground"
         app:cardCornerRadius="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="@string/result"
+            android:textAppearance="@style/ResultTextSmall"
+            />
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -41,13 +50,18 @@
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:gravity="center"
-                android:textAppearance="@style/ResultTextAppearance"
-                tools:text="Result: 25 ohm" />
+                android:textAppearance="@style/ResultTextBig"
+                tools:text=" 25K ohm" />
 
             <TextView
+                android:id="@+id/tv_suggestion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Suggested: 37 ohm (1/4W)" />
+                android:layout_marginStart="12dp"
+                android:text="Suggested: 37 ohm (1/4W)"
+                android:textAppearance="@style/ResultTextSmall"
+
+                />
 
 
         </LinearLayout>
@@ -86,7 +100,7 @@
                     android:layout_weight="1"
                     android:text="@string/led_color"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                    app:drawableStartCompat="@drawable/led_color_drawable" />
+                    />
 
                 <Spinner
                     android:id="@+id/s_led_color"

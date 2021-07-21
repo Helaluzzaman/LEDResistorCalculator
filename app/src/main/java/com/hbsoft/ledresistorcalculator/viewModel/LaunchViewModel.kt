@@ -24,12 +24,11 @@ class LaunchViewModel(application: Application): AndroidViewModel(application) {
     // working variables
     var currentLed= MutableLiveData<Led>()
     var currentConnection =  MutableLiveData<String>(LedData.SINGLE)
-    var rawResultOhm = MutableLiveData<String>()
-    val fullResult = MutableLiveData<Result>()
+    var fullResult = MutableLiveData<Result>()
 
     fun setFinalResult(resistor: String, suggestion: String){
-        fullResult.value?.result= resistor
-        fullResult.value?.suggestion = suggestion
+        val result = Result(resistor, suggestion)
+        fullResult.value = result
     }
 
     val listener = object : AdapterView.OnItemSelectedListener{
@@ -119,11 +118,10 @@ class LaunchViewModel(application: Application): AndroidViewModel(application) {
             val resistorOhm = (voltage/current)*1000
             val powerWatt = voltage* current/1000
             val finalResistorValue = addKiloMegaGigaSuffix(resistorOhm) + "Ω"
-            val suggestion = "resistor's power rating: ${Calculate.convertToStandardPower(powerWatt)}W"
+            val suggestion = "Suggestion: ${Calculate.convertToStandardPower(powerWatt)}W"
             setFinalResult(finalResistorValue, suggestion)
-            rawResultOhm.value = finalResistorValue    // fow testing
+            Log.i("result raw", resistorOhm.toString() + "ohm, Rating:" + powerWatt.toString())
             Log.i("result", finalResistorValue + "ohm, Rating:" + suggestion)
-
             return LedData.SUCCESS   // successful result
         }else{
             return LedData.VOLTAGE_PROBLEM  // 2 for voltage shortage.
@@ -157,6 +155,7 @@ class LaunchViewModel(application: Application): AndroidViewModel(application) {
             }
         }
     }
+
 
 
 
