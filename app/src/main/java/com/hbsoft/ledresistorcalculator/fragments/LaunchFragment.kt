@@ -13,6 +13,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.get
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.hbsoft.ledresistorcalculator.R
 import com.hbsoft.ledresistorcalculator.data.CalculationData
 import com.hbsoft.ledresistorcalculator.data.Led
@@ -102,6 +103,15 @@ class LaunchFragment : Fragment() {
             etForwardVoltage.setText(it.forwardVoltage_V.toString())
             etCurrentMax.setText(it.currentMax_mA.toString())
         })
+        mLaunchViewModel.CustomLed.observe(viewLifecycleOwner, {
+            if(it){
+                etForwardVoltage.isEnabled = true
+                etCurrentMax.isEnabled = true
+            }else{
+                etForwardVoltage.isEnabled = false
+                etCurrentMax.isEnabled = false
+            }
+        })
         mLaunchViewModel.currentConnection.observe(viewLifecycleOwner,{
             when(it){
                 LedData.SINGLE -> llExtraData.visibility = View.GONE
@@ -110,8 +120,9 @@ class LaunchFragment : Fragment() {
             }
         })
         mLaunchViewModel.fullResult.observe(viewLifecycleOwner, {
-            tvResult.text = it.result
-            tvSuggestion.text = it.suggestion
+            tvResult.text = it.resistor
+            val suggestion = "Suggested: " + it.standardResistor +"   " + it.resistorPower
+            tvSuggestion.text = suggestion
         })
 
     }
@@ -138,4 +149,10 @@ class LaunchFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.menu_about -> findNavController().navigate(R.id.action_launchFragment_to_aboutFragment)
+        }
+        return super.onOptionsItemSelected(item)
+    }
 }

@@ -21,6 +21,7 @@ class LedData{
         const val ZERO_PROBLEM = 0
         const val VOLTAGE_PROBLEM = 2
         const val LED_NUMBER_PROBLEM = 3
+        const val LOW_RESISTANCE_PROBLEM = 4
 
 
         fun getLedList(): List<Led>{
@@ -46,6 +47,13 @@ class LedData{
                 20.0
             )
             lst.add(yellow)
+            val custom = Led(4,
+                "Custom",
+                Color.YELLOW,// change this
+                2.1,
+                20.0
+            )
+            lst.add(custom)
 
             return lst
         }

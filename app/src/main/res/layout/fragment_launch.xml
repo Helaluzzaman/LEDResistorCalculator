@@ -50,6 +50,7 @@
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:gravity="center"
+                android:text="@string/blank"
                 android:textAppearance="@style/ResultTextBig"
                 tools:text=" 25K ohm" />
 
@@ -58,7 +59,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:text="Suggested: 37 ohm (1/4W)"
+                tools:text="Suggested: 37 ohm (1/4W)"
                 android:textAppearance="@style/ResultTextSmall"
 
                 />

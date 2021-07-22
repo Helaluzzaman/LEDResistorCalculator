@@ -14,5 +14,13 @@
     <string name="history">History</string>
     <string name="help">Help</string>
     <string name="result">result</string>
+    <string name="blank">_</string>
+    <string name="company_name">HB Software</string>
+    <string name="greeting">Greeting:</string>
+    <string name="author">Author:</string>
+    <string name="AuthorName">- Helal Uzzaman Hasib</string>
+    <string name="attribution3">- Launch Icon resource from Flaticon(Flaticon.com).</string>
+    <string name="attribution2">- Rishad Nur for assistance.</string>
+    <string name="attribution1">- App Idea based on \'LED Resistor Calculator\' Jacksoft Labs(Google play store).</string>
 
 </resources>

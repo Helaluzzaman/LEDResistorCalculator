@@ -14,8 +14,6 @@ import com.hbsoft.ledresistorcalculator.data.Led
 import com.hbsoft.ledresistorcalculator.data.LedData
 import com.hbsoft.ledresistorcalculator.data.Result
 import com.hbsoft.ledresistorcalculator.data.repository.Repository
-import java.math.RoundingMode
-import java.text.NumberFormat
 
 class LaunchViewModel(application: Application): AndroidViewModel(application) {
     val repository: Repository = Repository()
@@ -25,15 +23,28 @@ class LaunchViewModel(application: Application): AndroidViewModel(application) {
     var currentLed= MutableLiveData<Led>()
     var currentConnection =  MutableLiveData<String>(LedData.SINGLE)
     var fullResult = MutableLiveData<Result>()
+    val CustomLed = MutableLiveData<Boolean>(false)
 
-    fun setFinalResult(resistor: String, suggestion: String){
-        val result = Result(resistor, suggestion)
-        fullResult.value = result
+    // unit adding to result and setting up result.
+    private fun setResultWithUnit(resistor: String, standardResistor: String, resistorPower: String){
+        val resistorWUnit = resistor + "Ω"
+        val standardResistorWUnit = standardResistor + "Ω"
+        val resistorPowerWUnit = resistorPower + "W"
+        val fResult = Result(resistorWUnit,standardResistorWUnit,resistorPowerWUnit  )
+        fullResult.value = fResult
+    }
+    private fun clearResult(){
+        val resistorWUnit = "_"
+        val standardResistorWUnit = ""
+        val resistorPowerWUnit = ""
+        val fResult = Result(resistorWUnit,standardResistorWUnit,resistorPowerWUnit  )
+        fullResult.value = fResult
     }
 
     val listener = object : AdapterView.OnItemSelectedListener{
         override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 //            Toast.makeText(application.applicationContext, "${parent!!.getItemAtPosition(position)}, $position", Toast.LENGTH_SHORT).show()
+            clearResult()
             setLed(position)
         }
         override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -41,105 +52,43 @@ class LaunchViewModel(application: Application): AndroidViewModel(application) {
     }
     val radioGroupListener = RadioGroup.OnCheckedChangeListener { group, checkedId ->
         when(checkedId){
-            R.id.rb_single -> currentConnection.value = LedData.SINGLE
-            R.id.rb_series -> currentConnection.value = LedData.SERIES
-            R.id.rb_parallel -> currentConnection.value = LedData.PARALLEL
+            R.id.rb_single -> {
+                currentConnection.value = LedData.SINGLE
+//                clearResult()
+            }
+            R.id.rb_series -> {
+                currentConnection.value = LedData.SERIES
+//                clearResult()
+            }
+            R.id.rb_parallel -> {
+                currentConnection.value = LedData.PARALLEL
+//                clearResult()
+            }
         }
     }
 
     private fun setLed(position: Int) {
         currentLed.value = LedDataList[position]
         Log.i("Led", currentLed.value.toString())
+        // set custom
+        if(LedDataList[position].name == "Custom"){
+            setCustomTrue()
+        }else setCustomFalse()
+    }
+    fun setCustomTrue(){
+        CustomLed.value = true
+    }
+    fun setCustomFalse(){
+        CustomLed.value = false
     }
 
     // all calculation will be here
-    fun calculateResult(calculationData: CalculationData): Any{
-        Log.i("calculationData", calculationData.toString())
-
-        val inputVoltage = calculationData.input_voltage
-        val ledNumber = calculationData.led_number
-        val forwardVoltage = calculationData.led.forwardVoltage_V
-        val currentMax = calculationData.led.currentMax_mA
-        if(inputVoltage.equals(0.0)  || forwardVoltage.equals(0.0) || currentMax.equals(0.0)){
-            return LedData.ZERO_PROBLEM   // zero for any input value is filled with zero value
-        }else{
-            return when(calculationData.connection){
-                LedData.SINGLE -> singleConnectionCalculation(inputVoltage, forwardVoltage, currentMax)
-                LedData.SERIES -> seriesConnectionCalculation(inputVoltage, ledNumber, forwardVoltage, currentMax)
-                LedData.PARALLEL -> parallelConnectionCalculation(inputVoltage, ledNumber, forwardVoltage, currentMax)
-                else -> 100
-            }
-        }
-    }
-
-    private fun parallelConnectionCalculation(
-        inputVoltage: Double,
-        ledNumber: Int,
-        forwardVoltage: Double,
-        currentMax: Double
-    ): Any {
-        // this calculation for Parallel.
-        val voltage = inputVoltage - forwardVoltage
-        val current = currentMax* ledNumber
-        // end
-        if(!greaterThanOne(ledNumber)) return LedData.LED_NUMBER_PROBLEM    // led less then 2
-        return calculateResistorPower(voltage, current)
-    }
-
-    private fun seriesConnectionCalculation(
-        inputVoltage: Double,
-        ledNumber: Int,
-        forwardVoltage: Double,
-        currentMax: Double
-    ): Any {
-        // this calculation for series
-        val voltage = inputVoltage - (forwardVoltage*ledNumber)
-        val current = currentMax
-        //end
-        if(!greaterThanOne(ledNumber)) return LedData.LED_NUMBER_PROBLEM    // led less then 2
-        return calculateResistorPower(voltage, current)
-    }
-
-    private fun singleConnectionCalculation(
-        inputVoltage: Double,
-        forwardVoltage: Double,
-        currentMax: Double
-    ): Any {
-        // this calculation for single
-        val voltage = inputVoltage - forwardVoltage
-        val current = currentMax
-        //end
-        return calculateResistorPower(voltage, current)
-    }
-
-    // general calculation for resistor and resistor power using voltage across and current through.
-    private fun calculateResistorPower(voltage: Double, current: Double): Any {
-        if(greaterThanZero(voltage)){
-            val resistorOhm = (voltage/current)*1000
-            val powerWatt = voltage* current/1000
-            val finalResistorValue = CalculateResistor.addKiloMegaGigaSuffix(resistorOhm) + "Ω"
-            val suggestion = "Suggestion: ${CalculateResistor.convertToStandardPower(powerWatt)}W"
-            setFinalResult(finalResistorValue, suggestion)
-            Log.i("result raw", resistorOhm.toString() + "ohm, Rating:" + powerWatt.toString())
-            Log.i("result", finalResistorValue + "ohm, Rating:" + suggestion)
+    fun calculateResult(calculationData: CalculationData): Any {
+        val result =  CalculateResistor.calculateResult(calculationData)
+        if(result is Result){
+            setResultWithUnit(result.resistor, result.standardResistor, result.resistorPower)
             return LedData.SUCCESS   // successful result
-        }else{
-            return LedData.VOLTAGE_PROBLEM  // 2 for voltage shortage.
         }
-    }
-
-
-
-
-
-
-
-    private fun greaterThanZero(input: Double):Boolean{
-        if(input > 0)  return true
-        return false
-    }
-    fun greaterThanOne(input: Int):Boolean{
-        if(input > 1)  return true
-        return false
+        return result
     }
 }

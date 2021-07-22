@@ -1,6 +1,10 @@
 package com.hbsoft.ledresistorcalculator.data.Calculation
 
+import android.support.v4.media.MediaMetadataCompat
 import com.google.common.truth.Truth
+import com.hbsoft.ledresistorcalculator.data.CalculationData
+import com.hbsoft.ledresistorcalculator.data.LedData
+import com.hbsoft.ledresistorcalculator.data.Result
 import org.junit.Assert.*
 
 import org.junit.Test
@@ -17,5 +21,33 @@ class CalculateResistorTest {
 
     @Test
     fun generateSuggestion() {
+        val input = listOf<Double>(1.0)
+        val result = listOf("1.1", "1.3","1.5", "1.6", "2", "2.4")
+        for ((i, item) in input.withIndex()) {
+            Truth.assertThat(CalculateResistor.generateSuggestion(item)).isEqualTo(result[i])
+        }
+    }
+
+    @Test
+    fun fullCalculation1(){
+        val calculationData: CalculationData = CalculationData(
+            22.9,
+            1,
+            LedData.SINGLE,
+            LedData.getLedList()[1]
+            )
+        val result = Result("1.04K", " ", "1/2")
+        Truth.assertThat(CalculateResistor.calculateResult(calculationData)).isEqualTo(result)
+    }
+    @Test
+    fun fullCalculation2(){
+        val calculationData: CalculationData = CalculationData(
+            22.9,
+            3,
+            LedData.SERIES,
+            LedData.getLedList()[0]   // red led
+        )
+        val result = Result("845", " ", "1/2")
+        Truth.assertThat(CalculateResistor.calculateResult(calculationData)).isEqualTo(result)
     }
 }

@@ -1,6 +1,7 @@
 package com.hbsoft.ledresistorcalculator.data
 
 data class Result(
-    var result: String = "no",
-    var suggestion: String = "no"
+    var resistor: String = "_",
+    var standardResistor: String = "_",
+    var resistorPower: String = "_"
 )
