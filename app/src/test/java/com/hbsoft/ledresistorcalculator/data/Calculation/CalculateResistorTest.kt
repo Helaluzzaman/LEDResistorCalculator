@@ -20,11 +20,19 @@ class CalculateResistorTest {
     }
 
     @Test
-    fun generateSuggestion() {
-        val input = listOf<Double>(1.0)
-        val result = listOf("1.1", "1.3","1.5", "1.6", "2", "2.4")
+    fun generateSuggestion1() {
+        val input = listOf<Double>(1.0, 1.27, 1.45,1.55, 1.9, 2.34, 2.56, 2.89, 3.25, 3.78, 2.0, 5.7, 8.9,9.0, 9.2, )
+        val result = listOf<Number>(1.1, 1.3, 1.5,1.6, 2, 2.4, 2.7, 3, 3.3, 3.9, 2.2, 6.2, 9.1,9.1, 10)
         for ((i, item) in input.withIndex()) {
-            Truth.assertThat(CalculateResistor.generateSuggestion(item)).isEqualTo(result[i])
+            Truth.assertThat(CalculateResistor.generateSuggestion(item)).isEqualTo(result[i].toString())
+        }
+    }
+    @Test
+    fun generateSuggestion3() {
+        val input = listOf<Double>(100.2, 127.34, 145.0 ,155.0 , 190.0, 234.34, 256.0, 289.0, 325.0, 378.0, 200.0, 573.0, 890.0,900.0, 924.0)
+        val result = listOf<Any>(110, 130, 150 ,160, 200, 240, 270, 300, 330, 390, 220, 620, 910,910, "1K")
+        for ((i, item) in input.withIndex()) {
+            Truth.assertThat(CalculateResistor.generateSuggestion(item)).isEqualTo(result[i].toString())
         }
     }
 
@@ -36,7 +44,7 @@ class CalculateResistorTest {
             LedData.SINGLE,
             LedData.getLedList()[1]
             )
-        val result = Result("1.04K", " ", "1/2")
+        val result = Result("1.04K", "1.1K", "1/2")
         Truth.assertThat(CalculateResistor.calculateResult(calculationData)).isEqualTo(result)
     }
     @Test
@@ -47,7 +55,7 @@ class CalculateResistorTest {
             LedData.SERIES,
             LedData.getLedList()[0]   // red led
         )
-        val result = Result("845", " ", "1/2")
+        val result = Result("845", "910", "1/2")
         Truth.assertThat(CalculateResistor.calculateResult(calculationData)).isEqualTo(result)
     }
 }

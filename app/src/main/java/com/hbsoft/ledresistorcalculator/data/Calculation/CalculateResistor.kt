@@ -4,10 +4,9 @@ import android.util.Log
 import com.hbsoft.ledresistorcalculator.data.CalculationData
 import com.hbsoft.ledresistorcalculator.data.LedData
 import com.hbsoft.ledresistorcalculator.data.Result
-import java.lang.reflect.Array
 import java.math.RoundingMode
-import java.text.ChoiceFormat
 import java.text.NumberFormat
+import kotlin.math.pow
 import kotlin.math.roundToInt
 
 object CalculateResistor {
@@ -79,12 +78,13 @@ object CalculateResistor {
                 return LedData.LOW_RESISTANCE_PROBLEM
             }
             val finalResistorValue = addKiloMegaGigaSuffix(resistorOhm)
+            val standardResistorValue = generateSuggestion(resistorOhm)
             val resistorPower = convertToStandardPower(powerWatt)
             //logging
             Log.i("result raw", resistorOhm.toString() + "ohm, Rating:" + powerWatt.toString())
             Log.i("result", finalResistorValue + "ohm, Rating:" + resistorOhm)
             //end
-            return Result(finalResistorValue, " ",  resistorPower)
+            return Result(finalResistorValue, standardResistorValue,  resistorPower)
         }else{
             return LedData.VOLTAGE_PROBLEM  // 2 for voltage shortage.
         }
@@ -141,12 +141,25 @@ object CalculateResistor {
         }
     }
 
-    fun generateSuggestion(resistor: Double):String{
-        val limits = arrayOf<Double>( 1.0 ,1.1, 1.2, 1.3, 1.5, 1.6, 1.8, 2.0, 2.2, 2.4, 2.7, 3.0, 3.3, 3.6, 3.9, 4.3, 4.7, 5.1, 5.6, 6.2, 6.8, 7.5, 8.2, 9.1)
-        val format = arrayOf<String>("1.1", "1.2", "1.3", "1.5", "1.6", "1.8", "2.0", "2.2", "2.4", "2.7", "3.0", "3.3", "3.6", "3.9", "4.3", "4.7", "5.1", "5.6", "6.2", "6.8", "7.5", "8.2", "9.1", "10")
-        val cf = ChoiceFormat(limits.toDoubleArray(), format)
-//        Log.i("generate:", cf.format(resistor))
-        return cf.format(resistor)
+    fun generateSuggestion(resistor: Double): String {
+        var powerFactor = 0
+        var mResistor = resistor
+        if (mResistor >= 10) {
+            do {
+                mResistor /= 10
+                powerFactor++
+            } while ((mResistor > 10))
+        }
+        val limits = listOf<Float>(1.0f ,1.1f, 1.2f, 1.3f, 1.5f, 1.6f, 1.8f, 2.0f, 2.2f, 2.4f, 2.7f, 3.0f, 3.3f, 3.6f, 3.9f, 4.3f, 4.7f, 5.1f, 5.6f, 6.2f, 6.8f, 7.5f, 8.2f, 9.1f,10.0f)
+        var index = 0
+        for ((i, limit) in limits.withIndex()) {
+            if (mResistor < limit) {
+                index = i
+                break
+            }
+        }
+        val sResistor = limits[index] * (10.0.pow(powerFactor.toDouble()))
+        return addKiloMegaGigaSuffix(sResistor)
     }
 
 
