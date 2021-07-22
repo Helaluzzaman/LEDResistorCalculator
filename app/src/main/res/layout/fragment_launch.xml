@@ -60,6 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 tools:text="Suggested: 37 ohm (1/4W)"
+                android:text="@string/suggested"
                 android:textAppearance="@style/ResultTextSmall"
 
                 />

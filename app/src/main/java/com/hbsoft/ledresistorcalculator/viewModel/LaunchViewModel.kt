@@ -29,7 +29,7 @@ class LaunchViewModel(application: Application): AndroidViewModel(application) {
     private fun setResultWithUnit(resistor: String, standardResistor: String, resistorPower: String){
         val resistorWUnit = resistor + "Ω"
         val standardResistorWUnit = standardResistor + "Ω"
-        val resistorPowerWUnit = resistorPower + "W"
+        val resistorPowerWUnit = "·  " + resistorPower + "W"
         val fResult = Result(resistorWUnit,standardResistorWUnit,resistorPowerWUnit  )
         fullResult.value = fResult
     }
@@ -39,12 +39,12 @@ class LaunchViewModel(application: Application): AndroidViewModel(application) {
         val resistorPowerWUnit = ""
         val fResult = Result(resistorWUnit,standardResistorWUnit,resistorPowerWUnit  )
         fullResult.value = fResult
-    }
+    }   // will use later.
 
     val listener = object : AdapterView.OnItemSelectedListener{
         override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 //            Toast.makeText(application.applicationContext, "${parent!!.getItemAtPosition(position)}, $position", Toast.LENGTH_SHORT).show()
-            clearResult()
+//            clearResult()
             setLed(position)
         }
         override fun onNothingSelected(parent: AdapterView<*>?) {

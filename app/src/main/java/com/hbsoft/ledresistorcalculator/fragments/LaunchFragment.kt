@@ -90,9 +90,11 @@ class LaunchFragment : Fragment() {
 
     private fun showAlertDialogIfNeeded(result: Any) {
         when(result){
-            LedData.VOLTAGE_PROBLEM -> showAlertDialog("Inadequate Voltage!", "Voltage is Not Enough.")
-            LedData.LED_NUMBER_PROBLEM -> showAlertDialog("Inadequate Led!", "At least two LEDs need for this calculation.")
+            LedData.VOLTAGE_PROBLEM -> showAlertDialog("Insufficient Voltage!", "Voltage is not enough.")
+            LedData.LED_NUMBER_PROBLEM -> showAlertDialog("Insufficient Led!", "At least two LEDs need for this calculation.")
             LedData.ZERO_PROBLEM -> showAlertDialog("Zero!", "You have put Zero in Input.")
+            LedData.LOW_RESISTANCE_PROBLEM -> showAlertDialog("Limited Voltage!", "Voltage is not enough or Too many LEDs.")
+
         }
     }
 
@@ -121,7 +123,7 @@ class LaunchFragment : Fragment() {
         })
         mLaunchViewModel.fullResult.observe(viewLifecycleOwner, {
             tvResult.text = it.resistor
-            val suggestion = "Suggested: " + it.standardResistor +"   " + it.resistorPower
+            val suggestion = "Suggested: " + it.standardResistor +"  " + it.resistorPower
             tvSuggestion.text = suggestion
         })
 

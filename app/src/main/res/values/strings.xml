@@ -22,5 +22,6 @@
     <string name="attribution3">- Launch Icon resource from Flaticon(Flaticon.com).</string>
     <string name="attribution2">- Rishad Nur for assistance.</string>
     <string name="attribution1">- App Idea based on \'LED Resistor Calculator\' Jacksoft Labs(Google play store).</string>
+    <string name="suggested">Suggested:</string>
 
 </resources>
