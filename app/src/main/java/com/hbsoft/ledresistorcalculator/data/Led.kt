@@ -33,6 +33,13 @@ class LedData{
                 20.0
                 )
             lst.add(redLed)
+            val white = Led(1,
+                "White",
+                Color.WHITE,
+                3.6,
+                30.0
+            )
+            lst.add(white)
             val orangeLed = Led(2,
                 "Orange",
                 R.color.ORANGE,
@@ -47,6 +54,36 @@ class LedData{
                 20.0
             )
             lst.add(yellow)
+            val green = Led(1,
+                "Green",
+                Color.GREEN,
+                2.1,
+                20.0
+            )
+            lst.add(green)
+            val blue = Led(1,
+                "Blue",
+                Color.BLUE,
+                3.5,
+                20.0
+            )
+            lst.add(blue)
+            val infrared = Led(1,
+                "Infrared",
+                Color.WHITE,
+                1.7,
+                50.0
+            )
+            lst.add(infrared)
+            val ultraviolet = Led(1,
+                "Ultraviolet",
+                Color.WHITE,
+                3.6,
+                25.0
+            )
+            lst.add(ultraviolet)
+
+
             val custom = Led(4,
                 "Custom",
                 Color.YELLOW,// change this

@@ -12,7 +12,11 @@
         tools:layout="@layout/fragment_launch" >
         <action
             android:id="@+id/action_launchFragment_to_aboutFragment"
-            app:destination="@id/aboutFragment" />
+            app:destination="@id/aboutFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_launchFragment_to_settingFragment"
             app:destination="@id/settingFragment" />
