@@ -154,6 +154,7 @@ class LaunchFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.menu_about -> findNavController().navigate(R.id.action_launchFragment_to_aboutFragment)
+            R.id.menu_help -> findNavController().navigate(R.id.action_launchFragment_to_helpFragment)
         }
         return super.onOptionsItemSelected(item)
     }
