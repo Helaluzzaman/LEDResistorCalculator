@@ -40,6 +40,13 @@ class LaunchViewModel(application: Application): AndroidViewModel(application) {
         val fResult = Result(resistorWUnit,standardResistorWUnit,resistorPowerWUnit  )
         fullResult.value = fResult
     }   // will use later.
+    private fun setErrorResult(){
+        val resistorWUnit = "Error"
+        val standardResistorWUnit = ""
+        val resistorPowerWUnit = ""
+        val fResult = Result(resistorWUnit,standardResistorWUnit,resistorPowerWUnit  )
+        fullResult.value = fResult
+    }   // will use later.
 
     val listener = object : AdapterView.OnItemSelectedListener{
         override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -88,7 +95,10 @@ class LaunchViewModel(application: Application): AndroidViewModel(application) {
         if(result is Result){
             setResultWithUnit(result.resistor, result.standardResistor, result.resistorPower)
             return LedData.SUCCESS   // successful result
+        }else{
+            setErrorResult()
+            return result
         }
-        return result
+
     }
 }
