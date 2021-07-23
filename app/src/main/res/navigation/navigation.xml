@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
-        android:name="com.hbsoft.ledresistorcalculator.AboutFragment"
+        android:name="com.hbsoft.ledresistorcalculator.fragments.AboutFragment"
         android:label="About"
         tools:layout="@layout/fragment_about" >
         <action
@@ -48,8 +48,8 @@
     </fragment>
     <fragment
         android:id="@+id/helpFragment"
-        android:name="com.hbsoft.ledresistorcalculator.HelpFragment"
-        android:label="fragment_help"
+        android:name="com.hbsoft.ledresistorcalculator.fragments.HelpFragment"
+        android:label="Help"
         tools:layout="@layout/fragment_help" >
         <action
             android:id="@+id/action_helpFragment_to_launchFragment"
