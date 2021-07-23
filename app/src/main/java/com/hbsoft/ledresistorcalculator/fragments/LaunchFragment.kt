@@ -76,7 +76,7 @@ class LaunchFragment : Fragment() {
                 )
                 val result = mLaunchViewModel.calculateResult(calculationData)
                 showAlertDialogIfNeeded(result)
-                Toast.makeText(requireContext(), "Code: $result", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(requireContext(), "Code: $result", Toast.LENGTH_SHORT).show()
                 Log.i("result code",result.toString() )
             }catch (exception: Exception){
                 Log.i("input", exception.toString())
