@@ -20,6 +20,9 @@
         <action
             android:id="@+id/action_launchFragment_to_settingFragment"
             app:destination="@id/settingFragment" />
+        <action
+            android:id="@+id/action_launchFragment_to_helpFragment"
+            app:destination="@id/helpFragment" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
@@ -37,6 +40,15 @@
         tools:layout="@layout/fragment_setting" >
         <action
             android:id="@+id/action_settingFragment_to_launchFragment"
+            app:destination="@id/launchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/helpFragment"
+        android:name="com.hbsoft.ledresistorcalculator.HelpFragment"
+        android:label="fragment_help"
+        tools:layout="@layout/fragment_help" >
+        <action
+            android:id="@+id/action_helpFragment_to_launchFragment"
             app:destination="@id/launchFragment" />
     </fragment>
 </navigation>
