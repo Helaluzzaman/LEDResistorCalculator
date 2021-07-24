@@ -1,5 +1,4 @@
 # LEDResistorCalculator
-HbSoftware
 
 This is the app that drive me to this world of Mobile development. 
 I use an app from google play store 'LED Resistor calculator' and find this help for my work with LED's with resistor. Also at that time I were learning python.
@@ -24,3 +23,9 @@ FEATURES INCLUDE:
 - Insufficient voltage alert
 - Invalid Input alert
 - Dark theme for night mode use
+
+Thanks.
+
+
+
+HbSoftware
