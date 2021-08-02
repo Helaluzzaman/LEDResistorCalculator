@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.my_nav_host_fragment)
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.launchFragment, R.id.settingFragment), drawerLayout
+            setOf(R.id.launchFragment, R.id.settingsFragment), drawerLayout
         )
 
         setupSideNavigationView(navController)

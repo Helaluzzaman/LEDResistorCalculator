@@ -27,5 +27,12 @@
     <string name="resistor_power_rating_info"><![CDATA[The Resistor Power Rating is sometimes called the Resistors Wattage Rating and is defined as the amount of heat that a resistive element can dissipate for an indefinite period of time without degrading its performance.]]></string>
     <string name="result_help_image">Result help image</string>
     <string name="schematics">Schematics:</string>
+    <string name="general">General</string>
+    <string name="dark_mode_summery">Reduce glare and improve night viewing</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="setting">Setting</string>
+    <string name="home">Home</string>
+    <!-- Preference Titles -->
+
 
 </resources>
