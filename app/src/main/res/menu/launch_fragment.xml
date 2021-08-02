@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/menu_help"
+    <item android:id="@+id/action_launchFragment_to_helpFragment"
         android:title="@string/help"/>
-    <item android:id="@+id/menu_about"
+    <item android:id="@+id/action_launchFragment_to_aboutFragment"
         android:title="@string/about"/>
 </menu>

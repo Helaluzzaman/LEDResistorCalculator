@@ -14,6 +14,7 @@ import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.get
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.onNavDestinationSelected
 import com.hbsoft.ledresistorcalculator.R
 import com.hbsoft.ledresistorcalculator.data.CalculationData
 import com.hbsoft.ledresistorcalculator.data.Led
@@ -152,9 +153,10 @@ class LaunchFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        item.onNavDestinationSelected(findNavController())
         when(item.itemId){
-            R.id.menu_about -> findNavController().navigate(R.id.action_launchFragment_to_aboutFragment)
-            R.id.menu_help -> findNavController().navigate(R.id.action_launchFragment_to_helpFragment)
+//            R.id.menu_about -> findNavController().navigate(R.id.action_launchFragment_to_aboutFragment)
+//            R.id.menu_help -> findNavController().navigate(R.id.action_launchFragment_to_helpFragment)
         }
         return super.onOptionsItemSelected(item)
     }
