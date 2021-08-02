@@ -34,6 +34,7 @@ class LaunchFragment : Fragment() {
     lateinit var etCurrentMax : EditText    // input
     lateinit var rgConnection: RadioGroup
     lateinit var llExtraData: LinearLayout    // input [1]
+    lateinit var schametics : ImageView
 
     // variables
     lateinit var  currentLed: Led
@@ -54,6 +55,7 @@ class LaunchFragment : Fragment() {
         tvSuggestion = view.findViewById(R.id.tv_suggestion)
         rgConnection = view.findViewById(R.id.radioGroup)
         llExtraData = view.findViewById(R.id.ll_led_number)
+        schametics = view.findViewById(R.id.schematics)
         setSpinner()
         rgConnection.setOnCheckedChangeListener(mLaunchViewModel.radioGroupListener)
         bCalculate.setOnClickListener{
@@ -117,9 +119,18 @@ class LaunchFragment : Fragment() {
         })
         mLaunchViewModel.currentConnection.observe(viewLifecycleOwner,{
             when(it){
-                LedData.SINGLE -> llExtraData.visibility = View.GONE
-                LedData.SERIES -> llExtraData.visibility = View.VISIBLE
-                LedData.PARALLEL -> llExtraData.visibility = View.VISIBLE
+                LedData.SINGLE -> {
+                    llExtraData.visibility = View.GONE
+                    schametics.setImageResource(R.drawable.ic_schematics)
+                }
+                LedData.SERIES -> {
+                    llExtraData.visibility = View.VISIBLE
+                    schametics.setImageResource(R.drawable.ic_schematics_series)
+                }
+                LedData.PARALLEL -> {
+                    llExtraData.visibility = View.VISIBLE
+                    schametics.setImageResource(R.drawable.ic_schematics_parallel)
+                }
             }
         })
         mLaunchViewModel.fullResult.observe(viewLifecycleOwner, {
@@ -154,10 +165,10 @@ class LaunchFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         item.onNavDestinationSelected(findNavController())
-        when(item.itemId){
-//            R.id.menu_about -> findNavController().navigate(R.id.action_launchFragment_to_aboutFragment)
-//            R.id.menu_help -> findNavController().navigate(R.id.action_launchFragment_to_helpFragment)
-        }
+//        when(item.itemId){
+////            R.id.menu_about -> findNavController().navigate(R.id.action_launchFragment_to_aboutFragment)
+////            R.id.menu_help -> findNavController().navigate(R.id.action_launchFragment_to_helpFragment)
+//        }
         return super.onOptionsItemSelected(item)
     }
 }
