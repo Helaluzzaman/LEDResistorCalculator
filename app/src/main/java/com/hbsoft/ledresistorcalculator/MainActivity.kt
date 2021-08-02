@@ -11,6 +11,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.preference.PreferenceManager
 import com.google.android.material.navigation.NavigationView
 
 lateinit var appBarConfiguration: AppBarConfiguration
@@ -22,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+
 
 //        val host:NavHostFragment = supportFragmentManager.findFragmentById(R.id.my_nav_host_fragment) as NavHostFragment? ?: return
 //        val navController: NavController = host.navController
@@ -36,6 +37,12 @@ class MainActivity : AppCompatActivity() {
         setupActionBar(navController, appBarConfiguration)
 
 //        setupActionBarWithNavController(findNavController(R.id.my_nav_host_fragment))
+    }
+    private fun setDarkMode() {
+        val sharedPreferences  = PreferenceManager.getDefaultSharedPreferences(this)
+        if(sharedPreferences.getBoolean("Mode", false)){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
     }
 
     private fun setupActionBar(

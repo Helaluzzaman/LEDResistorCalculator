@@ -2,7 +2,7 @@
 
     <PreferenceCategory app:title="@string/general">
 
-        <SwitchPreference app:key="NightMode"
+        <SwitchPreference app:key="@string/Mode_key"
             app:title="@string/dark_mode"
             app:summary="@string/dark_mode_summery"
             />

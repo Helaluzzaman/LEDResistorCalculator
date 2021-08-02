@@ -1,6 +1,5 @@
 package com.hbsoft.ledresistorcalculator.fragments
 
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -8,13 +7,11 @@ import androidx.fragment.app.Fragment
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
-import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.get
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.onNavDestinationSelected
+import androidx.preference.PreferenceManager
 import com.hbsoft.ledresistorcalculator.R
 import com.hbsoft.ledresistorcalculator.data.CalculationData
 import com.hbsoft.ledresistorcalculator.data.Led
@@ -23,6 +20,10 @@ import com.hbsoft.ledresistorcalculator.viewModel.LaunchViewModel
 import java.lang.Exception
 
 class LaunchFragment : Fragment() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setDarkMode()
+    }
 
     val mLaunchViewModel: LaunchViewModel by viewModels()
     lateinit var sLedColor: Spinner
@@ -86,7 +87,6 @@ class LaunchFragment : Fragment() {
                 showAlertDialog("Empty Input!", "Input voltage or Led can not be empty." )
             }
         }
-//        AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_FOLLOW_SYSTEM)
         setUiData()
         return view
     }
@@ -170,5 +170,11 @@ class LaunchFragment : Fragment() {
 ////            R.id.menu_help -> findNavController().navigate(R.id.action_launchFragment_to_helpFragment)
 //        }
         return super.onOptionsItemSelected(item)
+    }
+    private fun setDarkMode() {
+        val sharedPreferences  = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        if(sharedPreferences.getBoolean(getString(R.string.Mode_key), false)){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
     }
 }

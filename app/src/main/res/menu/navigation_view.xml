@@ -2,10 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/launchFragment"
         android:title="@string/home"/>
+    <item android:id="@+id/settingsFragment"
+        android:title="@string/setting"/>
     <item android:id="@+id/action_launchFragment_to_helpFragment"
         android:title="@string/help"/>
     <item android:id="@+id/action_launchFragment_to_aboutFragment"
         android:title="@string/about"/>
-    <item android:id="@+id/settingsFragment"
-        android:title="@string/setting"/>
+
 </menu>
