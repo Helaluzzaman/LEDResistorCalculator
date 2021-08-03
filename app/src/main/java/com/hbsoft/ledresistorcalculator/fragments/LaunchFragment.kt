@@ -1,6 +1,5 @@
 package com.hbsoft.ledresistorcalculator.fragments
 
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -8,12 +7,11 @@ import androidx.fragment.app.Fragment
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
-import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.get
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.onNavDestinationSelected
+import androidx.preference.PreferenceManager
 import com.hbsoft.ledresistorcalculator.R
 import com.hbsoft.ledresistorcalculator.data.CalculationData
 import com.hbsoft.ledresistorcalculator.data.Led
@@ -22,6 +20,10 @@ import com.hbsoft.ledresistorcalculator.viewModel.LaunchViewModel
 import java.lang.Exception
 
 class LaunchFragment : Fragment() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setDarkMode()
+    }
 
     val mLaunchViewModel: LaunchViewModel by viewModels()
     lateinit var sLedColor: Spinner
@@ -33,6 +35,7 @@ class LaunchFragment : Fragment() {
     lateinit var etCurrentMax : EditText    // input
     lateinit var rgConnection: RadioGroup
     lateinit var llExtraData: LinearLayout    // input [1]
+    lateinit var schametics : ImageView
 
     // variables
     lateinit var  currentLed: Led
@@ -53,6 +56,7 @@ class LaunchFragment : Fragment() {
         tvSuggestion = view.findViewById(R.id.tv_suggestion)
         rgConnection = view.findViewById(R.id.radioGroup)
         llExtraData = view.findViewById(R.id.ll_led_number)
+        schametics = view.findViewById(R.id.schematics)
         setSpinner()
         rgConnection.setOnCheckedChangeListener(mLaunchViewModel.radioGroupListener)
         bCalculate.setOnClickListener{
@@ -83,7 +87,6 @@ class LaunchFragment : Fragment() {
                 showAlertDialog("Empty Input!", "Input voltage or Led can not be empty." )
             }
         }
-//        AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_FOLLOW_SYSTEM)
         setUiData()
         return view
     }
@@ -116,9 +119,18 @@ class LaunchFragment : Fragment() {
         })
         mLaunchViewModel.currentConnection.observe(viewLifecycleOwner,{
             when(it){
-                LedData.SINGLE -> llExtraData.visibility = View.GONE
-                LedData.SERIES -> llExtraData.visibility = View.VISIBLE
-                LedData.PARALLEL -> llExtraData.visibility = View.VISIBLE
+                LedData.SINGLE -> {
+                    llExtraData.visibility = View.GONE
+                    schametics.setImageResource(R.drawable.ic_schematics)
+                }
+                LedData.SERIES -> {
+                    llExtraData.visibility = View.VISIBLE
+                    schametics.setImageResource(R.drawable.ic_schematics_series)
+                }
+                LedData.PARALLEL -> {
+                    llExtraData.visibility = View.VISIBLE
+                    schametics.setImageResource(R.drawable.ic_schematics_parallel)
+                }
             }
         })
         mLaunchViewModel.fullResult.observe(viewLifecycleOwner, {
@@ -152,10 +164,17 @@ class LaunchFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.menu_about -> findNavController().navigate(R.id.action_launchFragment_to_aboutFragment)
-            R.id.menu_help -> findNavController().navigate(R.id.action_launchFragment_to_helpFragment)
-        }
+        item.onNavDestinationSelected(findNavController())
+//        when(item.itemId){
+////            R.id.menu_about -> findNavController().navigate(R.id.action_launchFragment_to_aboutFragment)
+////            R.id.menu_help -> findNavController().navigate(R.id.action_launchFragment_to_helpFragment)
+//        }
         return super.onOptionsItemSelected(item)
+    }
+    private fun setDarkMode() {
+        val sharedPreferences  = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        if(sharedPreferences.getBoolean(getString(R.string.Mode_key), false)){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
     }
 }
