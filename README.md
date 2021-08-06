@@ -27,6 +27,10 @@ FEATURES INCLUDE:
 Thanks.
 Sample:
 
+App Gallery
+===========
+[<img src="https://huaweimobileservices.com/wp-content/uploads/2020/05/Explore-it-on-AppGallery.png" width="300" height="125">](https://appgallery.huawei.com/#/app/C104551959)
+
 ![Custom Size – 9](https://user-images.githubusercontent.com/64187745/126871144-6bb55992-3930-424f-b9e5-3f32edb80f71.png)
 ![Custom Size – 12](https://user-images.githubusercontent.com/64187745/126871192-b74c4c25-986e-4a64-bebc-71f1f7539af1.png)
 
