@@ -13,7 +13,7 @@
         <entry key="app/src/main/res/layout-w960dp/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_about.xml" value="0.2582734590623782" />
-        <entry key="app/src/main/res/layout/fragment_help.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_help.xml" value="0.125" />
         <entry key="app/src/main/res/layout/fragment_launch.xml" value="0.1" />
         <entry key="app/src/main/res/layout/navigation_header.xml" value="0.2134646962233169" />
         <entry key="app/src/main/res/menu/launch_fragment.xml" value="0.21296296296296297" />
