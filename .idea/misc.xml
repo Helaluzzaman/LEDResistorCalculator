@@ -10,6 +10,7 @@
         <entry key="app/src/main/res/drawable/ic_series.xml" value="0.15993485342019545" />
         <entry key="app/src/main/res/drawable/led_color_drawable.xml" value="0.2557291666666667" />
         <entry key="app/src/main/res/layout-v26/fragment_launch.xml" value="0.23958333333333334" />
+        <entry key="app/src/main/res/layout-w960dp/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_about.xml" value="0.2582734590623782" />
         <entry key="app/src/main/res/layout/fragment_help.xml" value="0.335" />

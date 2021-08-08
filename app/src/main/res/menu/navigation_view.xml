@@ -6,10 +6,10 @@
     <item android:id="@+id/settingsFragment"
         android:icon="@drawable/ic_baseline_settings_24"
         android:title="@string/setting"/>
-    <item android:id="@+id/action_launchFragment_to_helpFragment"
+    <item android:id="@+id/helpFragment"
         android:icon="@drawable/ic_baseline_help_outline_24"
         android:title="@string/help"/>
-    <item android:id="@+id/action_launchFragment_to_aboutFragment"
+    <item android:id="@+id/aboutFragment"
         android:icon="@drawable/ic_outline_info_24"
         android:title="@string/about"/>
 

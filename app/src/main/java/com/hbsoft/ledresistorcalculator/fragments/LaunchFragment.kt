@@ -147,7 +147,7 @@ class LaunchFragment : Fragment() {
         sLedColor.adapter = Adapter
         sLedColor.onItemSelectedListener = mLaunchViewModel.listener
     }
-    fun showAlertDialog(title: String, info: String){
+    private fun showAlertDialog(title: String, info: String){
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle(title)
         builder.setMessage(info)
