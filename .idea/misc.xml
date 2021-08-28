@@ -5,13 +5,14 @@
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.1515625" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.15993485342019545" />
+        <entry key="app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.12638888888888888" />
         <entry key="app/src/main/res/drawable/ic_parallel.xml" value="0.15993485342019545" />
         <entry key="app/src/main/res/drawable/ic_schematics.xml" value="0.15993485342019545" />
         <entry key="app/src/main/res/drawable/ic_series.xml" value="0.15993485342019545" />
         <entry key="app/src/main/res/drawable/led_color_drawable.xml" value="0.2557291666666667" />
         <entry key="app/src/main/res/layout-v26/fragment_launch.xml" value="0.23958333333333334" />
         <entry key="app/src/main/res/layout-w960dp/activity_main.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_about.xml" value="0.2582734590623782" />
         <entry key="app/src/main/res/layout/fragment_help.xml" value="0.125" />
         <entry key="app/src/main/res/layout/fragment_launch.xml" value="0.1" />
