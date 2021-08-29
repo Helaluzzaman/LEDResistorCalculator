@@ -34,6 +34,8 @@
     <string name="home">Home</string>
     <string name="Mode_key">Mode</string>
     <string name="logo">Logo</string>
+    <string name="Why">Why should use resistor?</string>
+    <string name="Why_answer">Every LED is having a specific range of operating current, beyond the rated level of current it will damage. For the protection or limiting the current we simply use a resistor in series with it.</string>
     <!-- Preference Titles -->
 
 
