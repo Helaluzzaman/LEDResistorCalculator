@@ -32,6 +32,17 @@
             android:text="@string/resistor_power_rating_info"
             android:layout_marginStart="2dp"
             />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Why"
+            android:layout_marginTop="8dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Why_answer"
+            android:layout_marginStart="2dp"/>
     </LinearLayout>
 
 </ScrollView>
